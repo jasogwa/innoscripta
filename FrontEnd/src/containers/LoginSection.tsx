@@ -79,7 +79,7 @@ const LoginSection: React.FC = () => {
                 <Typography variant="h5" gutterBottom>
                     Login
                 </Typography>
-
+                {message}
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
