@@ -1,4 +1,4 @@
-import { Container, TextField, Button, Typography, Card, CardContent, Avatar, Grid, Divider } from '@mui/material';
+import { Container, TextField, Button, Typography, Card, CardContent, Grid, Divider } from '@mui/material';
 import axiosClient from '../axios-client';
 import { useState } from 'react';
 import { useStateContext } from '../context/ContextProvider';
