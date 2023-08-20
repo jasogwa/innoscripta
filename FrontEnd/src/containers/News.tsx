@@ -118,7 +118,7 @@ const News = () => {
                         >
                             <div>
                                 <CardContent>
-                                    <Avatar />
+                                    <div>User's Personalized Search</div>
                                     <Typography
                                         component={'span'}
                                         variant="body2"
