@@ -8,3 +8,8 @@
 * `docker-compose build && docker-compose up`
 * `docker exec innoscripta-php-1 php artisan migrate`
 * `docker exec innoscripta-php-1 php artisan fetch:news`
+
+
+# Run
+
+*   ``Open : http://localhost:4200/  on your browser``
