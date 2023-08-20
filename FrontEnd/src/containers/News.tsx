@@ -1,14 +1,18 @@
 import { Container, TextField, Button, Typography, Card, CardContent, Avatar, Grid, Divider } from '@mui/material';
-import axios from 'axios';
+import axiosClient from '../axios-client';
 import { useState } from 'react';
+import { useStateContext } from '../context/ContextProvider';
+import { Navigate } from 'react-router-dom';
 
 const News = () => {
+    const { token } = useStateContext();
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
     const [keyword, setKeyword] = useState('');
     const [news, setNews] = useState([]);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-    const baseURL = 'http://127.0.0.1:8000';
 
     const fetchUserData = async () => {
         if (!keyword) {
@@ -18,7 +22,7 @@ const News = () => {
 
         try {
             setIsLoading(true);
-            const response = await axios.get(`${baseURL}/api/v1/news`, {
+            const response = await axiosClient.get(`/news`, {
                 params: {
                     keyword
                 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosClient from '../axios-client';
 import { useNavigate } from 'react-router-dom';
 import { Container, Paper, Typography, TextField, Button, Grid } from '@mui/material';
 
@@ -16,8 +16,6 @@ const RegisterSection: React.FC = () => {
         password_confirmation?: string;
     }>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const baseURL = 'http://127.0.0.1:8000';
 
     const validateForm = () => {
         const newErrors: {
@@ -55,13 +53,13 @@ const RegisterSection: React.FC = () => {
 
         if (Object.keys(errors).length === 0) {
             try {
-                await axios.post(`${baseURL}/api/v1/register`, {
+                await axiosClient.post(`/register`, {
                     name,
                     email,
                     password,
                     password_confirmation
                 });
-                navigate('/login');
+                navigate('/');
             } catch (error) {
                 console.error(error);
             }

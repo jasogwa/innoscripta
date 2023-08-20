@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosClient from '../axios-client';
+import { useStateContext } from '../context/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { Container, Paper, Typography, TextField, Button, Grid } from '@mui/material';
 
@@ -12,8 +13,8 @@ const LoginSection: React.FC = () => {
         password?: string;
     }>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const baseURL = 'http://127.0.0.1:8000';
+    const { setUser, setToken } = useStateContext();
+    const [message, setMessage] = useState(null);
 
     const validateForm = () => {
         const newErrors: {
@@ -40,11 +41,22 @@ const LoginSection: React.FC = () => {
 
         if (Object.keys(errors).length === 0) {
             try {
-                await axios.post(`${baseURL}/api/v1/login`, {
-                    email,
-                    password
-                });
-                navigate('/');
+                axiosClient
+                    .post(`/login`, {
+                        email,
+                        password
+                    })
+                    .then(({ data }) => {
+                        setUser(data.user);
+                        setToken(data.token);
+                        navigate('/');
+                    })
+                    .catch((err) => {
+                        const response = err.response;
+                        if (response && response.status === 422) {
+                            setMessage(response.data.message);
+                        }
+                    });
             } catch (error) {
                 console.error(error);
             }
