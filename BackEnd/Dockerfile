@@ -25,8 +25,6 @@ RUN composer install
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Run migrations and start the server
-RUN chmod +x run-commands.sh
-CMD ["./run-commands.sh"]
-
+CMD  php artisan serve --host=0.0.0.0
 
 EXPOSE 8000
