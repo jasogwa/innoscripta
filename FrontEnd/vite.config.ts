@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 /// <reference types="vite/client" />
 
 import { defineConfig } from 'vite';
@@ -8,15 +7,9 @@ export default defineConfig({
     plugins: [react()],
     server: {
         host: true,
-        port: 8000,
+        port: 4200,
         watch: {
             usePolling: true
         }
-    },
-    test: {
-        globals: true,
-        environment: 'jsdom',
-        css: true,
-        setupFiles: './src/test/setup.ts'
     }
 });
